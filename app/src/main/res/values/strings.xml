@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GitLab_Android</string>
+    <string name="login_fail">Login Failure, check your username and password and try again</string>
+    <string name="title_activity_student_menu">StudentMenu</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

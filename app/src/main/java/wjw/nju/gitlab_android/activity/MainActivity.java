@@ -1,5 +1,6 @@
 package wjw.nju.gitlab_android.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -9,21 +10,18 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-
-import java.util.HashMap;
-
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.apiservice.LoginService;
-import wjw.nju.gitlab_android.util.HttpRequestUtil;
+import wjw.nju.gitlab_android.apiservice.apistate.LoginVO;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
+
+    public  final static String LOGIN_KEY = "apiservice.apistate.LoginVO";
 
     private EditText et_name, et_pass;
     private Button bt_username_clear;
@@ -38,12 +36,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et_name = (EditText) findViewById(R.id.username);
-        et_pass = (EditText) findViewById(R.id.password);
+        initComponent();
 
-        bt_username_clear = (Button) findViewById(R.id.bt_username_clear);
-        bt_password_clear = (Button) findViewById(R.id.bt_pwd_clear);
-        bt_pwd_eye = (Button) findViewById(R.id.bt_pwd_eye);
         bt_username_clear.setOnClickListener(this);
         bt_password_clear.setOnClickListener(this);
         bt_pwd_eye.setOnClickListener(this);
@@ -51,12 +45,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         et_name.addTextChangedListener(username_watcher);
         et_pass.addTextChangedListener(password_watcher);
-        mLoginButton = (Button) findViewById(R.id.login);
-
         mLoginButton.setOnClickListener(this);
 
+    }
 
-
+    public void initComponent(){
+        et_name = (EditText) findViewById(R.id.username);
+        et_pass = (EditText) findViewById(R.id.password);
+        bt_username_clear = (Button) findViewById(R.id.bt_username_clear);
+        bt_password_clear = (Button) findViewById(R.id.bt_pwd_clear);
+        bt_pwd_eye = (Button) findViewById(R.id.bt_pwd_eye);
+        mLoginButton = (Button) findViewById(R.id.login);
     }
 
     @Override
@@ -118,7 +117,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                Toast.makeText(MainActivity.this, msg.toString(), Toast.LENGTH_LONG).show();
+                LoginVO loginVO = (LoginVO) msg.obj;
+                if(loginVO.getLogin_state().equals(LoginVO.LoginState.LOGIN_FAILURE))
+                    Toast.makeText(MainActivity.this, R.string.login_fail, Toast.LENGTH_SHORT).show();
+                else{
+                    Intent intent = new Intent(MainActivity.this,TeacherMenu.class);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putSerializable(LOGIN_KEY,loginVO);
+                    intent.putExtras(mBundle);
+                    startActivity(intent);
+                }
             }
         };
         LoginService loginService = new LoginService(handler,username,password);
