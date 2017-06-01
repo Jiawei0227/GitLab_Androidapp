@@ -121,7 +121,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 if(loginVO.getLogin_state().equals(LoginVO.LoginState.LOGIN_FAILURE))
                     Toast.makeText(MainActivity.this, R.string.login_fail, Toast.LENGTH_SHORT).show();
                 else{
-                    Intent intent = new Intent(MainActivity.this,TeacherMenu.class);
+                    Intent intent = null;
+                    if(loginVO.getType().equals(LoginVO.LoginType.teacher)) {
+                        intent = new Intent(MainActivity.this, TeacherMenu.class);
+                    }else if(loginVO.getType().equals(LoginVO.LoginType.student)){
+                        intent = new Intent(MainActivity.this, TeacherMenu.class);
+                    }
                     Bundle mBundle = new Bundle();
                     mBundle.putSerializable(LOGIN_KEY,loginVO);
                     intent.putExtras(mBundle);
