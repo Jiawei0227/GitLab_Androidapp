@@ -31,7 +31,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="我本无名"
             android:textColor="#ffffff"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"/>
@@ -40,7 +39,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="码农"
             android:textSize="20dp"
             android:textColor="#ffffff"
             android:layout_marginTop="5dp"
@@ -83,14 +81,6 @@
             android:background="@drawable/main_drawer_background"
             android:clickable="true"
             android:gravity="center_vertical">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="切换主题"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@drawable/main_drawer_text_color"
-                />
 
         </LinearLayout>
         <LinearLayout

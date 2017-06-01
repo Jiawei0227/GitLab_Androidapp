@@ -3,6 +3,30 @@
     <string name="login_fail">Login Failure, check your username and password and try again</string>
     <string name="title_activity_student_menu">StudentMenu</string>
 
+    <string name="student">学生</string>
+    <string name="teacher">老师</string>
+    <string name="tea_index">首页</string>
+    <string name="tea_class">班级列表</string>
+    <string name="tea_homework">作业</string>
+    <string name="tea_exercise">练习</string>
+    <string name="tea_exam">考试</string>
+    <string name="tea_score">分数</string>
+
+    <string name="admin">管理员</string>
+
+    <string name="menu_index">首页</string>
+    <string name="menu_search">查询</string>
+    <string name="menu_notify">通知</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_register">登出</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_shuffle">随机看</string>
+
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+    <string name="public_ok">确定</string>
+    <string name="public_cancel">取消</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
