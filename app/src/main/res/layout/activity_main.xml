@@ -35,11 +35,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_centerHorizontal="true">
 
         <FrameLayout
             android:id="@+id/username_layout"

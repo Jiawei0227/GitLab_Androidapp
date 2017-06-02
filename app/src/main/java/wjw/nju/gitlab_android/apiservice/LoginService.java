@@ -1,21 +1,14 @@
 package wjw.nju.gitlab_android.apiservice;
 
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-
-import wjw.nju.gitlab_android.activity.MainActivity;
 import wjw.nju.gitlab_android.apiservice.apistate.LoginVO;
-import wjw.nju.gitlab_android.util.HttpRequestUtil;
+import wjw.nju.gitlab_android.util.APIHttpRequestUtil;
 
 /**
  * Created by wangjiawei on 2017/5/31.
@@ -23,7 +16,7 @@ import wjw.nju.gitlab_android.util.HttpRequestUtil;
 
 public class LoginService extends AsyncTask<String, String ,String>{
 
-    Handler mhandler = new Handler();
+    Handler mhandler;
     String username;
     String password;
 
@@ -42,7 +35,7 @@ public class LoginService extends AsyncTask<String, String ,String>{
             JSONObject js = new JSONObject();
             js.put("username",username);
             js.put("password",password);
-            re = HttpRequestUtil.postJSON("http://115.29.184.56:8090/api/user/auth",js);
+            re = APIHttpRequestUtil.postJSON(APIConfig.LOGIN_SERVICE,js);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,6 +59,7 @@ public class LoginService extends AsyncTask<String, String ,String>{
                 loginVO.setAvatar(jsonObject.getString("avatar"));
                 loginVO.setGender(LoginVO.Gender.valueOf(jsonObject.getString("gender")));
                 loginVO.setEmail(jsonObject.getString("email"));
+                loginVO.setPassword(password);
                 if(loginVO.getType().equals(LoginVO.LoginType.student)){
                     loginVO.setS_git_id(jsonObject.getInt("gitId")+"");
                     loginVO.setS_number(jsonObject.getString("number"));
