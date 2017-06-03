@@ -1,7 +1,5 @@
 package wjw.nju.gitlab_android.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +8,7 @@ import android.view.ViewGroup;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.activity.TeacherMenu;
-import wjw.nju.gitlab_android.apiservice.apistate.LoginVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 
 
 public class IndexFragment extends Fragment {

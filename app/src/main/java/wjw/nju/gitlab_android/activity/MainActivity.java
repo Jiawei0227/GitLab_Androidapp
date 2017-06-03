@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.apiservice.LoginService;
-import wjw.nju.gitlab_android.apiservice.apistate.LoginVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 

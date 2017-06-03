@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import wjw.nju.gitlab_android.apiservice.apistate.CourseVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
 import wjw.nju.gitlab_android.util.APIHttpRequestUtil;
 
 /**
@@ -22,8 +22,6 @@ public class GetAllClassService extends AsyncTask<String,String,String> {
 
     private String token;
     Handler mhandler;
-
-    private static final String url = "http://115.29.184.56:8090/api/group";
 
     public GetAllClassService(Handler handler, String token){
         mhandler = handler;

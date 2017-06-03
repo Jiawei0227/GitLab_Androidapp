@@ -1,4 +1,4 @@
-package wjw.nju.gitlab_android.apiservice.apistate;
+package wjw.nju.gitlab_android.apiservice.apiVO;
 
 /**
  * Created by wangjiawei on 2017/6/2.

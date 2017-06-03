@@ -1,4 +1,4 @@
-package wjw.nju.gitlab_android.apiservice.apistate;
+package wjw.nju.gitlab_android.apiservice.apiVO;
 
 import java.io.Serializable;
 

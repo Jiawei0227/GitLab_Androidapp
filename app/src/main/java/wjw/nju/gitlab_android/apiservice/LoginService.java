@@ -7,7 +7,7 @@ import android.os.Message;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import wjw.nju.gitlab_android.apiservice.apistate.LoginVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 import wjw.nju.gitlab_android.util.APIHttpRequestUtil;
 
 /**
