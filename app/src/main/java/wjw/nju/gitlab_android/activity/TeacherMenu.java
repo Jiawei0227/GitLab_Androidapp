@@ -43,8 +43,8 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_menu);
-        initComponent();
         initToolbar();
+        initComponent();
 
         Intent intent = this.getIntent();
         loginVO = (LoginVO) intent.getExtras().getSerializable(MainActivity.LOGIN_KEY);
@@ -115,8 +115,14 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
         FragmentTransaction ft = fm.beginTransaction();
 
         if(menuName.equals(R.string.tea_index)){
+            if(iFragment == null) {
+                iFragment = new IndexFragment();
+            }
             switchContent(isFragment,iFragment);
         }
+        invalidateOptionsMenu();
+        drawer_main.closeDrawers();
+
 
     }
 
@@ -132,16 +138,16 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
             //添加渐隐渐现的动画
             FragmentTransaction ft = fm.beginTransaction();
 
-//            if (!to.isAdded()) {    // 先判断是否被add过
-//                ft.hide(from).add(R.id.frame_main, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
-//            } else {
-//                ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
-//            }
+            if (!to.isAdded()) {    // 先判断是否被add过
+                ft.hide(from).add(R.id.frame_main, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
             Bundle bundle = new Bundle();
             bundle.putSerializable(LOGIN_VO, loginVO);
             isFragment.setArguments(bundle);
 
-            ft.replace(R.id.frame_main,to).commit();
+            //ft.replace(R.id.frame_main,to).commit();
         }
     }
 
@@ -151,9 +157,11 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
     public void initFragment(Bundle savedInstanceState)
     {
         //判断activity是否重建，如果不是，则不需要重新建立fragment.
-        if(savedInstanceState==null) {
+        if(savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
-            if(iFragment==null) {
+            FragmentTransaction ft = fm.beginTransaction();
+
+            if(iFragment == null) {
                 iFragment = new IndexFragment();
             }
             isFragment = iFragment;
@@ -162,8 +170,7 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
             bundle.putSerializable(LOGIN_VO, loginVO);
             isFragment.setArguments(bundle);
 
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.frame_main, iFragment).commit();
+            ft.add(R.id.frame_main, iFragment).commit();
         }
     }
 }

@@ -21,7 +21,7 @@ import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
 
-    public  final static String LOGIN_KEY = "apiservice.apistate.LoginVO";
+    public  final static String LOGIN_KEY = "apiservice.apiVO.LoginVO";
 
     private EditText et_name, et_pass;
     private Button bt_username_clear;
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     public void initComponent(){
         et_name = (EditText) findViewById(R.id.username);
         et_pass = (EditText) findViewById(R.id.password);
+        et_name.setTextColor(getResources().getColor(R.color.black));
+        et_pass.setTextColor(getResources().getColor(R.color.black));
         bt_username_clear = (Button) findViewById(R.id.bt_username_clear);
         bt_password_clear = (Button) findViewById(R.id.bt_pwd_clear);
         bt_pwd_eye = (Button) findViewById(R.id.bt_pwd_eye);

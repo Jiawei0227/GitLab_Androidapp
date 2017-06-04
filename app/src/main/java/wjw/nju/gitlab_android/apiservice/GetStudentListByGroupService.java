@@ -53,7 +53,7 @@ public class GetStudentListByGroupService extends AsyncTask<String, String,Strin
             List<StudentVO> studentVOList = new ArrayList<>();
             for(int i = 0; i<jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
-                //JSONObject.
+
                 StudentVO studentVO = new StudentVO();
                 studentVO.setId(object.getInt("id")+"");
                 studentVO.setUsername(object.getString("username"));

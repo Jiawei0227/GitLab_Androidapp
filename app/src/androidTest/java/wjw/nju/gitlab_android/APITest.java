@@ -62,7 +62,7 @@ public class APITest {
                 System.out.println(re.get(0).getCurrentTime());
             }
         };
-        GetCourseExamService getAllClassService = new GetCourseExamService("1",Base64EncodeUtil.getToken("liuqin","123"),h, GetCourseExamService.GET_COURSE_TYPE.HOMEWORK);
+        GetCourseExamService getAllClassService = new GetCourseExamService("1",Base64EncodeUtil.getToken("141250143","141250143"),h, GetCourseExamService.GET_COURSE_TYPE.EXAM);
         getAllClassService.execute();
     }
 }
