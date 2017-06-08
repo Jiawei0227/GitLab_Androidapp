@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
+import wjw.nju.gitlab_android.fragment.ClassInfoFragment;
 import wjw.nju.gitlab_android.fragment.IndexFragment;
 import wjw.nju.gitlab_android.fragment.Tool_NavigationDrawerFragment;
+import wjw.nju.gitlab_android.util.TopColorUtil;
 
 public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDrawerFragment.menuClickListener{
 
@@ -28,6 +30,8 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
     private TextView usertype;
 
     private IndexFragment iFragment;                     //定义首页fragment
+    private ClassInfoFragment classInfoFragment;        //定义全部课
+
     //private FindFragment fFragment;                      //定义发现fragment
     //private AttentionFragment aFragment;                 //定义关注fragment
     //private CollectionFragment cFragment;                //定义收藏fragment
@@ -44,6 +48,8 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_menu);
         initToolbar();
+        TopColorUtil.setWindowStatusBarColor(this,R.color.primary_dark);
+
         initComponent();
 
         Intent intent = this.getIntent();
@@ -76,7 +82,7 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
         toolbar = (Toolbar)this.findViewById(R.id.teacher_toolbar);
         toolbar.setTitle("首页");                     // 标题的文字需在setSupportActionBar之前，不然会无效
         setSupportActionBar(toolbar);
-
+        toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
         //为了生成，工具栏左上角的动态图标，要使用下面的方法
         drawer_main = (DrawerLayout) findViewById(R.id.drawer_main);
         mDrawerToggle = new ActionBarDrawerToggle(this, drawer_main, toolbar, R.string.drawer_open,
@@ -111,14 +117,16 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
     public void menuClick(String menuName) {
         getSupportActionBar().setTitle(menuName);
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        if(menuName.equals(R.string.tea_index)){
+        if(menuName.equals(getResources().getString(R.string.tea_index))){
             if(iFragment == null) {
                 iFragment = new IndexFragment();
             }
             switchContent(isFragment,iFragment);
+        }else if(menuName.equals(getResources().getString(R.string.tea_class))){
+            if(classInfoFragment == null){
+                classInfoFragment = new ClassInfoFragment();
+            }
+            switchContent(isFragment,classInfoFragment);
         }
         invalidateOptionsMenu();
         drawer_main.closeDrawers();
@@ -138,16 +146,16 @@ public class TeacherMenu extends AppCompatActivity implements Tool_NavigationDra
             //添加渐隐渐现的动画
             FragmentTransaction ft = fm.beginTransaction();
 
-            if (!to.isAdded()) {    // 先判断是否被add过
-                ft.hide(from).add(R.id.frame_main, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
-            } else {
-                ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
-            }
+//            if (!to.isAdded()) {    // 先判断是否被add过
+//                ft.hide(from).add(R.id.frame_main, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+//            } else {
+//                ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+//            }
             Bundle bundle = new Bundle();
             bundle.putSerializable(LOGIN_VO, loginVO);
             isFragment.setArguments(bundle);
 
-            //ft.replace(R.id.frame_main,to).commit();
+            ft.replace(R.id.frame_main,to).commit();
         }
     }
 

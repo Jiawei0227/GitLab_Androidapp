@@ -11,45 +11,46 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="vertical"
-        android:background="#3A5FCD">
+        android:background="@color/primary_dark">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
-            <wjw.nju.gitlab_android.util.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@mipmap/img_empty_followers"
-                app:border_width="1dp"
-                app:border_color="@color/white"
-                ></wjw.nju.gitlab_android.util.CircleImageView>
-        </LinearLayout>
+        <wjw.nju.gitlab_android.util.CircleImageView
+            android:id="@+id/circleImageView2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.03"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/img_empty_followers"
+            app:border_color="@color/white"
+            app:border_width="1dp"></wjw.nju.gitlab_android.util.CircleImageView>
+
         <TextView
             android:id="@+id/txt_main_drawer_UserNick"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:textColor="#ffffff"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/txt_main_drawer_UserProfile"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
     </LinearLayout>
     <ListView
         android:id="@+id/lv_main_drawer_leftmenu"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="4.72"
         android:background="#fff"
         android:choiceMode="singleChoice"
         android:layout_marginTop="5dp"
@@ -67,37 +68,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="0.97"
             android:background="@drawable/main_drawer_background"
             android:clickable="true"
             android:gravity="center_vertical">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:background="@drawable/main_drawer_background"
-            android:clickable="true"
-            android:gravity="center_vertical">
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:text="设置"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@drawable/main_drawer_text_color"/>
+                android:textColor="@drawable/main_drawer_text_color" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"

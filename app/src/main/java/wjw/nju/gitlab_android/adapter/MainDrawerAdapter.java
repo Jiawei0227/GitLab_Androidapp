@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import wjw.nju.gitlab_android.R;
+import wjw.nju.gitlab_android.adapter.Item.MainDrawerMenu;
 
 /**
  * 左侧侧滑菜单的adpter
@@ -45,7 +46,7 @@ public class MainDrawerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         menuItem mItem;
-        if(convertView==null)
+        if(convertView == null)
         {
             convertView = inflater.inflate(R.layout.fragment_main_drawer_item,null);
             mItem = new menuItem();

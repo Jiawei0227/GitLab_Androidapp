@@ -6,16 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.activity.TeacherMenu;
+import wjw.nju.gitlab_android.adapter.IndexInfoListAdapter;
+import wjw.nju.gitlab_android.adapter.Item.IndexInfoItem;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 
 
 public class IndexFragment extends Fragment {
 
     private LoginVO loginVO;
+
+    private ListView indexlistInfo;
+    private List<IndexInfoItem> indexInfoItemList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,39 +37,32 @@ public class IndexFragment extends Fragment {
     }
 
     private void initComponent(View view){
-
-
-        TextView index_name = (TextView) view.findViewById(R.id.index_name);
-        index_name.setText(loginVO.getName());
-
-        TextView index_username = (TextView) view.findViewById(R.id.index_username);
-        index_username.setText(loginVO.getUsername());
-
-        TextView index_email = (TextView) view.findViewById(R.id.index_email);
-        index_email.setText(loginVO.getEmail());
-
+        indexInfoItemList = new ArrayList<>();
+        indexInfoItemList.add(new IndexInfoItem("姓名",loginVO.getName()));
+        indexInfoItemList.add(new IndexInfoItem("用户名",loginVO.getUsername()));
+        String type = "";
+        switch (loginVO.getType()){
+            case student: type = getResources().getString(R.string.student); break;
+            case teacher: type = getResources().getString(R.string.teacher); break;
+            case admin: type = getResources().getString(R.string.admin); break;
+        }
+        indexInfoItemList.add(new IndexInfoItem("类型",type));
         String gender = "";
         switch (loginVO.getGender()){
             case male: gender = "男"; break;
             case female: gender = "女"; break;
         }
-        TextView index_gender = (TextView) view.findViewById(R.id.index_gender);
-        index_gender.setText(gender);
+        indexInfoItemList.add(new IndexInfoItem("性别",gender));
+        indexInfoItemList.add(new IndexInfoItem("GitID",loginVO.getS_git_id()==null?"暂无":loginVO.getS_git_id()));
+        indexInfoItemList.add(new IndexInfoItem("学号",loginVO.getS_number()==null?"暂无":loginVO.getS_number()));
 
-        String type = "";
-        switch (loginVO.getType()){
-            case student: type = getResources().getString(R.string.student);; break;
-            case teacher: type = getResources().getString(R.string.teacher);; break;
-            case admin: type = getResources().getString(R.string.admin); break;
-        }
-        TextView index_type = (TextView) view.findViewById(R.id.index_type);
-        index_type.setText(type);
 
-        TextView index_gitid = (TextView) view.findViewById(R.id.index_gitid);
-        index_gitid.setText(loginVO.getS_git_id()==null?"暂无":loginVO.getS_git_id());
 
-        TextView index_number = (TextView) view.findViewById(R.id.index_number);
-        index_number.setText(loginVO.getS_number()==null?"暂无":loginVO.getS_number());
+
+        indexlistInfo = (ListView)view.findViewById(R.id.index_list_info);
+        indexlistInfo.setAdapter(new IndexInfoListAdapter(indexInfoItemList, this.getActivity()));
+
+
 
 
     }

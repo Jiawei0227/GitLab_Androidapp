@@ -1,8 +1,6 @@
 package wjw.nju.gitlab_android.fragment;
 
-import android.content.Context;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,7 +14,7 @@ import java.util.List;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.adapter.MainDrawerAdapter;
-import wjw.nju.gitlab_android.adapter.MainDrawerMenu;
+import wjw.nju.gitlab_android.adapter.Item.MainDrawerMenu;
 
 
 public class Tool_NavigationDrawerFragment extends Fragment {

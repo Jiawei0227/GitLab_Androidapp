@@ -1,4 +1,4 @@
-package wjw.nju.gitlab_android.adapter;
+package wjw.nju.gitlab_android.adapter.Item;
 
 /**
  * Created by wangjiawei on 2017/6/1.

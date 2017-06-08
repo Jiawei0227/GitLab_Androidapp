@@ -17,6 +17,7 @@ import android.widget.Toast;
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.apiservice.LoginService;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
+import wjw.nju.gitlab_android.util.TopColorUtil;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        TopColorUtil.setWindowStatusBarColor(this,R.color.primary_dark);
         initComponent();
 
         bt_username_clear.setOnClickListener(this);
