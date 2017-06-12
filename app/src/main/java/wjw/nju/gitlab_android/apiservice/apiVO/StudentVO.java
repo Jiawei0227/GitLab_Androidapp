@@ -1,10 +1,12 @@
 package wjw.nju.gitlab_android.apiservice.apiVO;
 
+import java.io.Serializable;
+
 /**
  * Created by wangjiawei on 2017/6/3.
  */
 
-public class StudentVO {
+public class StudentVO implements Serializable {
 
     private String id;
 

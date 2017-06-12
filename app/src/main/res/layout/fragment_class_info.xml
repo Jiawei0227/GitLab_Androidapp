@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context="wjw.nju.gitlab_android.fragment.ClassInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ListView
         android:id="@+id/class_listview_info"
         android:layout_width="match_parent"

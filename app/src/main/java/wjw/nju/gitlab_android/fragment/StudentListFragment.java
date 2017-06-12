@@ -83,7 +83,7 @@ public class StudentListFragment extends Fragment {
             studentInfoItem.clickListener = e->{
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frame_main,new StudentListFragment()).commit();
+                ft.replace(R.id.frame_main,StudentInfoDetailFragment.getInstatnce(c)).commit();
             };
             studentInfoItem.studentVO = c;
             lists.add(studentInfoItem);

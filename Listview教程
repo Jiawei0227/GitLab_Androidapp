@@ -1,0 +1,267 @@
+# ListView Android 教程
+
+最近在写一个Android的大作业项目，迫于DDL的驱动= =，学了学安卓的使用
+发现我们的项目要用到大量的ListView模式，于是必须要好好学习一下了！
+
+但是发现网上的教程还是比较难懂的，于是经过了一系列的试炼，终于做成了！
+
+## 第一步 创建一个Fragment或者Activity
+Fragment或者Activity是用来承载界面上的ListView的。我们知道ListView其实是一个小组件，那这个组件需要放到一个容器中去承载。这里我创建的是Fragment。
+
+Fragment创建好了以后先什么都不用写，找到对应的xml文件，在上面添加一个ListView并且为ListView设定好ID后即可
+
+**效果图**：
+![这里写图片描述](http://img.blog.csdn.net/20170611013645080?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2FuZ2ppYXdlaTAyMjc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+**对应Fragment的xml文件**：
+``` xml
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="wjw.nju.gitlab_android.fragment.ClassInfoFragment">
+
+    <ListView
+        android:id="@+id/class_listview_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
+
+```
+
+
+## 第二步 创建一个Item
+我们要为List中的每一个列创建一个类似于模板的Item对象。以后当我们完成Item后会把Item中的对象插入到ListView中变成一个列表
+
+**Item对象**：
+![这里写图片描述](http://img.blog.csdn.net/20170611014048344?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2FuZ2ppYXdlaTAyMjc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+这里的一个小Item到之后就会填充到list中成为一个Item
+
+**对应的xml文件**：
+
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:minHeight="80dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        app:srcCompat="@mipmap/class_classinfo" />
+
+    <TextView
+        android:id="@+id/class_className"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_toRightOf="@+id/imageView3"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/class_classInfo_detail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        app:srcCompat="@mipmap/class_info_arrow" />
+
+</RelativeLayout>
+```
+## 第三步 创建一个Adapter
+Adapter类似于一个Item的填充器，它匹配一个Item，我们可以将这个Item的列表放到adapter中。然后将adapter封装起来
+**ClassInfoAdapter**：
+
+``` java
+package wjw.nju.gitlab_android.adapter;
+
+import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
+
+import wjw.nju.gitlab_android.R;
+import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
+import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
+import wjw.nju.gitlab_android.fragment.StudentListFragment;
+
+/**
+ * Created by wangjiawei on 2017/6/8.
+ */
+
+public class ClassInfoAdapter extends BaseAdapter{
+
+    private List<CourseInfoItem> courseInfos;
+    private Context context;
+    private LayoutInflater layoutInflater;
+
+    public ClassInfoAdapter(List<CourseInfoItem> indexInfoItems,Context context ){
+        this.courseInfos = indexInfoItems;
+        this.context = context;
+        this.layoutInflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getCount() {
+        return courseInfos.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return courseInfos.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if(convertView == null){
+            convertView = layoutInflater.inflate(R.layout.class_info_listview_item,null);
+        }
+
+        TextView title = (TextView)convertView.findViewById(R.id.class_className);
+        title.setText(courseInfos.get(position).getName());
+
+        ImageView arrow = (ImageView) convertView.findViewById(R.id.class_classInfo_detail);
+        arrow.setOnClickListener(courseInfos.get(position).getListener());
+
+        return convertView;
+    }
+
+}
+
+```
+类需要实现BaseAdapter基类，含有一个List< item>的成员，这个成员将来就是你的列表中的属性
+
+在getView()方法中，我们初始化这个Item的xml中的内容，将相应的文本内容填充进去。
+
+## 第四步 在Fragment中初始化ListView
+最后我们回到最初创建的Fragment中
+进行ListView的初始化。通过view获取到ListView
+调用ListView特有的setAdapter()方法将Item创建进去。
+
+``` java
+package wjw.nju.gitlab_android.fragment;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import wjw.nju.gitlab_android.R;
+import wjw.nju.gitlab_android.activity.TeacherMenu;
+import wjw.nju.gitlab_android.adapter.ClassInfoAdapter;
+import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
+import wjw.nju.gitlab_android.apiservice.GetAllClassService;
+import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
+import wjw.nju.gitlab_android.util.Base64EncodeUtil;
+
+public class ClassInfoFragment extends Fragment{
+
+    private LoginVO loginVO;
+    private List<CourseVO> courseVOs;
+    private ListView classInfoView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_class_info, container, false);
+        initVO(view);
+
+        return view;
+    }
+
+    private void initVO(View view){
+        Bundle bundle = getArguments();//从activity传过来的Bundle
+        if(bundle!=null){
+            loginVO = (LoginVO) bundle.getSerializable(TeacherMenu.LOGIN_VO);
+        }
+
+        Handler h = new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                courseVOs = (List<CourseVO>) msg.obj;
+                initComponent(view);
+            }
+        };
+
+        GetAllClassService getAllClassService = new GetAllClassService(h, Base64EncodeUtil.getToken(loginVO.getUsername(),loginVO.getPassword()));
+        getAllClassService.execute();
+    }
+
+    private void initComponent(View view){
+        List<CourseInfoItem> lists = new ArrayList<>();
+        for (CourseVO c: courseVOs) {
+            lists.add(new CourseInfoItem(c.getId(),c.getName(), e->{
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                ft.replace(R.id.frame_main,StudentListFragment.getInstatnce(c.getId(),loginVO)).commit();
+            }));
+        }
+
+        classInfoView = (ListView) view.findViewById(R.id.class_listview_info);
+
+        ClassInfoAdapter c = new ClassInfoAdapter(lists,this.getActivity());
+        classInfoView.setAdapter(c);
+
+    }
+}
+```
+主要的方法在initComponent中，其他的是和登录有关的一些代码。
+
+以上完成后运行你的程序
+结果图：
+![运行结果描述](http://img.blog.csdn.net/20170611015306329?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2FuZ2ppYXdlaTAyMjc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
+----------
+至此，我们就完成了ListView的创建，初始化以及运行的全过程。
+
+感谢阅读！
+
+以上素材取自Android一个项目，Github的安卓客户端制作
+Github源码： [https://github.com/WJerry0227/GitLab_Androidapp](https://github.com/WJerry0227/GitLab_Androidapp)
