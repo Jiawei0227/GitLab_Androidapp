@@ -19,7 +19,7 @@ import wjw.nju.gitlab_android.util.JsonUtil;
  * Created by wangjiawei on 2017/6/3.
  */
 
-public class GetCourseExamService extends AsyncTask<String, String ,String>{
+public class GetCourseAssignmentService extends AsyncTask<String, String ,String>{
 
     private String token;
 
@@ -33,7 +33,7 @@ public class GetCourseExamService extends AsyncTask<String, String ,String>{
         EXAM, HOMEWORK, EXERCISE
     }
 
-    public GetCourseExamService(String courseId,String token,Handler handler,GET_COURSE_TYPE type) {
+    public GetCourseAssignmentService(String courseId, String token, Handler handler, GET_COURSE_TYPE type) {
         this.token = token;
         this.courseId = courseId;
         this.handler = handler;

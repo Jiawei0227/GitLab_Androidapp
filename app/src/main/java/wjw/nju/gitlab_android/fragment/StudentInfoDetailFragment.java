@@ -86,4 +86,6 @@ public class StudentInfoDetailFragment extends Fragment {
         studentList.setAdapter(new IndexInfoListAdapter(indexInfoItemList, this.getActivity()));
 
     }
+
+
 }

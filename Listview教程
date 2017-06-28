@@ -190,7 +190,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import wjw.nju.gitlab_android.R;
-import wjw.nju.gitlab_android.activity.TeacherMenu;
+import wjw.nju.gitlab_android.activity.MenuActivity;
 import wjw.nju.gitlab_android.adapter.ClassInfoAdapter;
 import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
 import wjw.nju.gitlab_android.apiservice.GetAllClassService;

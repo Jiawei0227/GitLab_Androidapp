@@ -16,27 +16,40 @@ import java.util.List;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.activity.MenuActivity;
-import wjw.nju.gitlab_android.adapter.ClassInfoAdapter;
+import wjw.nju.gitlab_android.adapter.CourseListAdapter;
 import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
-import wjw.nju.gitlab_android.apiservice.GetAllClassService;
+import wjw.nju.gitlab_android.apiservice.GetAssignmentService;
+import wjw.nju.gitlab_android.apiservice.GetCoursesService;
 import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 import wjw.nju.gitlab_android.util.Base64EncodeUtil;
 
-public class ClassInfoFragment extends Fragment{
+/**
+ * Created by wangjiawei on 2017/6/28.
+ */
 
-    private LoginVO loginVO;
+public class AssignmentListFragment extends Fragment {
+
+    private ListView listView;
     private List<CourseVO> courseVOs;
-    private ListView classInfoView;
+    private LoginVO loginVO;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+
+        }
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_class_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_course_list, container, false);
         initVO(view);
-
         return view;
     }
 
@@ -54,26 +67,25 @@ public class ClassInfoFragment extends Fragment{
             }
         };
 
-        GetAllClassService getAllClassService = new GetAllClassService(h, Base64EncodeUtil.getToken(loginVO.getUsername(),loginVO.getPassword()));
+        GetAssignmentService getAllClassService = new GetAssignmentService( Base64EncodeUtil.getToken(loginVO.getUsername(),loginVO.getPassword()),h);
         getAllClassService.execute();
     }
 
     private void initComponent(View view){
         List<CourseInfoItem> lists = new ArrayList<>();
         for (CourseVO c: courseVOs) {
-                lists.add(new CourseInfoItem(c.getId(), c.getName(), e -> {
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.frame_main, StudentListFragment.getInstatnce(c.getId(), loginVO)).addToBackStack(null).commit();
-                }));
+            CourseInfoItem studentInfoItem = new CourseInfoItem(c.getId(),c.getName());
+            studentInfoItem.setListener( e->{
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.frame_main,AssignmentDetailFragment.getInstance(c.getId(),loginVO)).addToBackStack(null).commit();
+            });
+            lists.add(studentInfoItem);
         }
 
-        classInfoView = (ListView) view.findViewById(R.id.class_listview_info);
-
-        ClassInfoAdapter c = new ClassInfoAdapter(lists,this.getActivity());
-        classInfoView.setAdapter(c);
+        listView = (ListView) view.findViewById(R.id.Listview_courseList);
+        CourseListAdapter c = new CourseListAdapter(lists,this.getActivity(),R.mipmap.task);
+        listView.setAdapter(c);
 
     }
-
-
 }

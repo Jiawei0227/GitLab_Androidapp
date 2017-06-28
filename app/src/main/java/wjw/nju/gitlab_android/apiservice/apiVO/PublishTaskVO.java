@@ -1,12 +1,13 @@
 package wjw.nju.gitlab_android.apiservice.apiVO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wangjiawei on 2017/6/3.
  */
 
-public class PublishTaskVO {
+public class PublishTaskVO implements Serializable {
 
     /**
      * id : 3
@@ -102,7 +103,7 @@ public class PublishTaskVO {
         this.questions = questions;
     }
 
-    public static class QuestionsBean {
+    public static class QuestionsBean implements Serializable {
         /**
          * id : 1
          * title : 题目1
@@ -207,7 +208,7 @@ public class PublishTaskVO {
             this.knowledgeVos = knowledgeVos;
         }
 
-        public static class CreatorBean {
+        public static class CreatorBean implements Serializable {
             /**
              * id : 1
              * username : liuqin

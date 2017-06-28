@@ -1,7 +1,5 @@
 package wjw.nju.gitlab_android.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,14 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wjw.nju.gitlab_android.R;
-import wjw.nju.gitlab_android.activity.TeacherMenu;
-import wjw.nju.gitlab_android.adapter.ClassInfoAdapter;
-import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
 import wjw.nju.gitlab_android.adapter.Item.StudentInfoItem;
 import wjw.nju.gitlab_android.adapter.StudentInfoListAdapter;
-import wjw.nju.gitlab_android.apiservice.GetAllClassService;
 import wjw.nju.gitlab_android.apiservice.GetStudentListByGroupService;
-import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 import wjw.nju.gitlab_android.apiservice.apiVO.StudentVO;
 import wjw.nju.gitlab_android.util.Base64EncodeUtil;
@@ -83,7 +76,7 @@ public class StudentListFragment extends Fragment {
             studentInfoItem.clickListener = e->{
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frame_main,StudentInfoDetailFragment.getInstatnce(c)).commit();
+                ft.replace(R.id.frame_main,StudentInfoDetailFragment.getInstatnce(c)).addToBackStack(null).commit();
             };
             studentInfoItem.studentVO = c;
             lists.add(studentInfoItem);

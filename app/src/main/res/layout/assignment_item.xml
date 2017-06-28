@@ -15,26 +15,27 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp"
-        app:srcCompat="@mipmap/class_classinfo" />
+        app:srcCompat="@mipmap/ic_drawer_collect_normal" />
 
     <TextView
-        android:id="@+id/class_className"
+        android:id="@+id/assignment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_toEndOf="@+id/class_image"
-        android:layout_toRightOf="@+id/class_image"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/class_image"
+        android:layout_toEndOf="@+id/class_image" />
 
     <ImageView
-        android:id="@+id/class_classInfo_detail"
+        android:id="@+id/assignment_detail"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+
         android:layout_centerVertical="true"
         android:layout_marginEnd="13dp"
         android:layout_marginRight="13dp"

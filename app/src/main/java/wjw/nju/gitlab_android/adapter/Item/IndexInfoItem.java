@@ -10,6 +10,8 @@ public class IndexInfoItem {
 
     private String subtitle;
 
+    private String image;
+
     public String getTitle() {
         return title;
     }
@@ -22,6 +24,14 @@ public class IndexInfoItem {
         return subtitle;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
     }
@@ -29,5 +39,11 @@ public class IndexInfoItem {
     public IndexInfoItem(String title, String subtitle) {
         this.title = title;
         this.subtitle = subtitle;
+    }
+
+    public IndexInfoItem(String title, String subtitle , String image) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = image;
     }
 }

@@ -5,15 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import wjw.nju.gitlab_android.R;
-import wjw.nju.gitlab_android.activity.TeacherMenu;
+import wjw.nju.gitlab_android.activity.MenuActivity;
 import wjw.nju.gitlab_android.adapter.IndexInfoListAdapter;
 import wjw.nju.gitlab_android.adapter.Item.IndexInfoItem;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
@@ -70,8 +68,9 @@ public class IndexFragment extends Fragment {
     private void initLoginVO(){
         Bundle bundle = getArguments();//从activity传过来的Bundle
         if(bundle!=null){
-            loginVO = (LoginVO) bundle.getSerializable(TeacherMenu.LOGIN_VO);
+            loginVO = (LoginVO) bundle.getSerializable(MenuActivity.LOGIN_VO);
         }
     }
+
 
 }

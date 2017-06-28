@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 else{
                     Intent intent = null;
                     if(loginVO.getType().equals(LoginVO.LoginType.teacher)) {
-                        intent = new Intent(MainActivity.this, TeacherMenu.class);
+                        intent = new Intent(MainActivity.this, MenuActivity.class);
                     }else if(loginVO.getType().equals(LoginVO.LoginType.student)){
-                        intent = new Intent(MainActivity.this, TeacherMenu.class);
+                        intent = new Intent(MainActivity.this, MenuActivity.class);
                     }
                     Bundle mBundle = new Bundle();
                     mBundle.putSerializable(LOGIN_KEY,loginVO);
