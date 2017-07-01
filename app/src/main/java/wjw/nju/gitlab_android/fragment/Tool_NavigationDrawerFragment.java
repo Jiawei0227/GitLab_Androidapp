@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wjw.nju.gitlab_android.R;
+import wjw.nju.gitlab_android.activity.MainActivity;
+import wjw.nju.gitlab_android.activity.MenuActivity;
 import wjw.nju.gitlab_android.adapter.MainDrawerAdapter;
 import wjw.nju.gitlab_android.adapter.Item.MainDrawerMenu;
 
@@ -22,6 +24,7 @@ public class Tool_NavigationDrawerFragment extends Fragment {
     private ListView lv_main_drawer_leftmenu;
     //定义菜单的listView
     private List<MainDrawerMenu> list_menu;
+    private String type;
 
 
     /**
@@ -48,6 +51,7 @@ public class Tool_NavigationDrawerFragment extends Fragment {
      */
     private void initleftMenuContral(View view) {
         lv_main_drawer_leftmenu = (ListView)view.findViewById(R.id.lv_main_drawer_leftmenu);
+        this.setType();
         list_menu = getMenuItem();
         lv_main_drawer_leftmenu.setAdapter(new MainDrawerAdapter(getActivity(),list_menu));
         lv_main_drawer_leftmenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,6 +65,11 @@ public class Tool_NavigationDrawerFragment extends Fragment {
         });
     }
 
+    private void setType(){
+        MenuActivity menuActivity = (MenuActivity) getActivity();
+        type = menuActivity.getType();
+    }
+
     /**
      * 从arrays.xml中取出数据，装入list<T>中
      * @return
@@ -68,9 +77,15 @@ public class Tool_NavigationDrawerFragment extends Fragment {
     private List<MainDrawerMenu> getMenuItem()
     {
         List<MainDrawerMenu> list_menu = new ArrayList<MainDrawerMenu>();
-
-        String[] itemTitle = getResources().getStringArray(R.array.item_title);
-        TypedArray itemIconRes = getResources().obtainTypedArray(R.array.item_icon_res);
+        String[] itemTitle = null;
+        TypedArray itemIconRes = null;
+        if(type.equals("teacher")) {
+            itemTitle = getResources().getStringArray(R.array.item_teacher_title);
+            itemIconRes = getResources().obtainTypedArray(R.array.item_teacher_icon_res);
+        }else{
+            itemTitle = getResources().getStringArray(R.array.item_student_title);
+            itemIconRes = getResources().obtainTypedArray(R.array.item_student_icon_res);
+        }
 
         for(int i=0;i<itemTitle.length;i++)
         {

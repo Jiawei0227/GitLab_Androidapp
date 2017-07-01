@@ -50,14 +50,15 @@ public class MenuActivity extends AppCompatActivity implements Tool_NavigationDr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = this.getIntent();
+        loginVO = (LoginVO) intent.getExtras().getSerializable(MainActivity.LOGIN_KEY);
         setContentView(R.layout.activity_teacher_menu);
         initToolbar();
         TopColorUtil.setWindowStatusBarColor(this,R.color.primary_dark);
 
         initComponent();
 
-        Intent intent = this.getIntent();
-        loginVO = (LoginVO) intent.getExtras().getSerializable(MainActivity.LOGIN_KEY);
+
         setValue(loginVO);
 
         initFragment(savedInstanceState);
@@ -187,7 +188,7 @@ public class MenuActivity extends AppCompatActivity implements Tool_NavigationDr
             //添加渐隐渐现的动画
             FragmentTransaction ft = fm.beginTransaction();
 
-            ft.replace(R.id.frame_main,to).addToBackStack(null).commit();
+            ft.replace(R.id.frame_main,to).commit();
         }
     }
 
@@ -212,6 +213,10 @@ public class MenuActivity extends AppCompatActivity implements Tool_NavigationDr
 
             ft.add(R.id.frame_main, iFragment).commit();
         }
+    }
+
+    public String getType(){
+        return loginVO.getType().toString();
     }
 
 

@@ -6,15 +6,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.adapter.ClassInfoAdapter;
+import wjw.nju.gitlab_android.adapter.CourseListAdapter;
 import wjw.nju.gitlab_android.adapter.Item.CourseInfoItem;
 import wjw.nju.gitlab_android.adapter.Item.IndexInfoItem;
 import wjw.nju.gitlab_android.apiservice.GetAssignmentScoreService;
@@ -72,7 +77,24 @@ public class AssignmentDetailFragment extends Fragment {
     }
 
     public void initComponent(View view){
+        TextView title = (TextView) view.findViewById(R.id.textview_assignment_detail_title);
+        title.setText("Assignment: "+assignmentScoreVO.getAssignmentId());
+
         List<CourseInfoItem> lists = new ArrayList<>();
+        for(AssignmentScoreVO.QuestionsBean q:assignmentScoreVO.getQuestions()){
+            CourseInfoItem courseInfoItem = new CourseInfoItem(q.getQuestionInfo().getId()+"",q.getQuestionInfo().getTitle());
+            courseInfoItem.setListener(e->{
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.frame_main,QuestionInfoDetailFragment.newInstance(loginVO,q)).addToBackStack(null).commit();
+            });
+
+            lists.add(courseInfoItem);
+        }
+
+        CourseListAdapter courseListAdapter = new CourseListAdapter(lists,this.getActivity(),R.mipmap.assignments);
+        ListView listView = (ListView) view.findViewById(R.id.listview_assignment_detail);
+        listView.setAdapter(courseListAdapter);
 
     }
 }

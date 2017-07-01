@@ -1,12 +1,13 @@
 package wjw.nju.gitlab_android.apiservice.apiVO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wangjiawei on 2017/6/28.
  */
 
-public class AssignmentScoreVO {
+public class AssignmentScoreVO implements Serializable{
 
     /**
      * assignmentId : 12
@@ -32,7 +33,7 @@ public class AssignmentScoreVO {
         this.questions = questions;
     }
 
-    public static class QuestionsBean {
+    public static class QuestionsBean implements Serializable{
         /**
          * questionInfo : {"id":1,"title":"题目1","description":"xxxxx","type":"exam"}
          * students : [{"studentId":227,"studentName":"zz","studentNumber":"141","score":100,"scored":true}]

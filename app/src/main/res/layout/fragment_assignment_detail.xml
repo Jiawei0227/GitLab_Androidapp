@@ -9,22 +9,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@color/accent">
+        android:background="@color/colorPrimaryDark">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textview_assignment_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="TextView"
+            android:textColor="@color/aliceblue"
             android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/aliceblue"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/index_list_info"
+        android:id="@+id/listview_assignment_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
