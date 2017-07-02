@@ -25,23 +25,29 @@
 
 # 项目截图
 1. 登录界面
+
 ![](assets/markdown-img-paste-20170703010607721.png)
 
 2. 查看学生列表
+
 ![](assets/markdown-img-paste-20170703010658252.png)
 ![](assets/markdown-img-paste-20170703010718317.png)
 
 3. 作业、练习、考试
+
 ![](assets/markdown-img-paste-2017070301081813.png)
 ![](assets/markdown-img-paste-20170703010833636.png)
 
 4. Assignment得分
+
 ![](assets/markdown-img-paste-20170703010927921.png)
 
 5. 考试分析
+
 ![](assets/markdown-img-paste-20170703010951168.png)
 
 6. 考试详情分析
+
 ![](assets/markdown-img-paste-2017070301101230.png)
 ![](assets/markdown-img-paste-20170703011056535.png)
 ![](assets/markdown-img-paste-20170703011140643.png)
