@@ -3,6 +3,8 @@ package wjw.nju.gitlab_android.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,21 +23,28 @@ import java.util.List;
 import wjw.nju.gitlab_android.R;
 import wjw.nju.gitlab_android.adapter.Item.StudentScoreItem;
 import wjw.nju.gitlab_android.adapter.StudentScoreAdapter;
+import wjw.nju.gitlab_android.apiservice.GetAllClassService;
+import wjw.nju.gitlab_android.apiservice.GetAssignmentAnalysisService;
+import wjw.nju.gitlab_android.apiservice.apiVO.AssignmentAnalysisVO;
 import wjw.nju.gitlab_android.apiservice.apiVO.AssignmentScoreVO;
+import wjw.nju.gitlab_android.apiservice.apiVO.CourseVO;
 import wjw.nju.gitlab_android.apiservice.apiVO.LoginVO;
 import wjw.nju.gitlab_android.util.AnalysisDataVO;
+import wjw.nju.gitlab_android.util.Base64EncodeUtil;
 
 public class QuestionInfoDetailFragment extends Fragment {
 
     LoginVO loginVO;
+    String assignmentId;
     AssignmentScoreVO.QuestionsBean questionsBean;
 
 
-    public static QuestionInfoDetailFragment newInstance(LoginVO param1, AssignmentScoreVO.QuestionsBean param2) {
+    public static QuestionInfoDetailFragment newInstance(LoginVO param1, AssignmentScoreVO.QuestionsBean param2,String assignmentId) {
         QuestionInfoDetailFragment fragment = new QuestionInfoDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable("loginVO",param1);
         args.putSerializable("questionBean",param2);
+        args.putString("assignmentId",assignmentId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,6 +55,7 @@ public class QuestionInfoDetailFragment extends Fragment {
         if (getArguments() != null) {
             loginVO = (LoginVO)getArguments().getSerializable("loginVO");
             questionsBean = (AssignmentScoreVO.QuestionsBean)getArguments().getSerializable("questionBean");
+            assignmentId = getArguments().getString("assignmentId");
         }
     }
 
@@ -88,6 +99,17 @@ public class QuestionInfoDetailFragment extends Fragment {
                 studentScoreItem.score = "未得分";
                 analysisDataVO.noScore += 1;
             }
+            studentScoreItem.onClickListener = new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    TestResultsFragment testResultsFragment = TestResultsFragment.newInstance(loginVO,s.getStudentId()+"",assignmentId,questionsBean.getQuestionInfo().getId()+"");
+                    ft.replace(R.id.frame_main, testResultsFragment).addToBackStack(null).commit();
+
+                }
+
+            };
 
             lists.add(studentScoreItem);
         }

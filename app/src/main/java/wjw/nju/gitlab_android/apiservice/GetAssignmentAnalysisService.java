@@ -28,6 +28,7 @@ public class GetAssignmentAnalysisService extends AsyncTask<String,String,String
 
     public GetAssignmentAnalysisService(String assignmentId,String studentId, String token, Handler handler) {
         this.token = token;
+        this.studentId = studentId;
         this.assignmentId = assignmentId;
         this.handler = handler;
     }

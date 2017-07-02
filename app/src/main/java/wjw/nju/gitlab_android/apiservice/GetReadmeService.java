@@ -25,11 +25,14 @@ public class GetReadmeService  extends AsyncTask<String, String,String> {
 
     private String studentId;
 
+    private String questionId;
+
     private Handler handler;
 
 
-    public GetReadmeService(String assignmentId, String studentId, String token, Handler handler) {
+    public GetReadmeService(String assignmentId, String studentId,String questionId, String token, Handler handler) {
         this.token = token;
+        this.questionId = questionId;
         this.studentId = studentId;
         this.assignmentId = assignmentId;
         this.handler = handler;
@@ -39,7 +42,7 @@ public class GetReadmeService  extends AsyncTask<String, String,String> {
     protected String doInBackground(String... params) {
         String re = null;
         try {
-            re = APIHttpRequestUtil.getJSON(APIConfig.GET_README(assignmentId,studentId), new JSONObject(), token);
+            re = APIHttpRequestUtil.getJSON(APIConfig.GET_README(assignmentId,studentId,questionId), new JSONObject(), token);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,7 +54,7 @@ public class GetReadmeService  extends AsyncTask<String, String,String> {
         super.onPostExecute(result);
         Message msg = handler.obtainMessage();
         try {
-            List<ReadmeVO> publishTaskVOs = JsonUtil.stringToList(result,ReadmeVO.class);
+           ReadmeVO publishTaskVOs = (ReadmeVO) JsonUtil.stringToObject(result,ReadmeVO.class);
             msg.obj = publishTaskVOs;
         } catch (Exception e) {
             e.printStackTrace();

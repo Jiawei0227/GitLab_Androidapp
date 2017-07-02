@@ -24,7 +24,6 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
-        android:layout_toEndOf="@+id/class_image"
         android:layout_toRightOf="@+id/class_image"
         android:text="TextView"
         android:textSize="18sp" />

@@ -86,7 +86,7 @@ public class AssignmentDetailFragment extends Fragment {
             courseInfoItem.setListener(e->{
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frame_main,QuestionInfoDetailFragment.newInstance(loginVO,q)).addToBackStack(null).commit();
+                ft.replace(R.id.frame_main,QuestionInfoDetailFragment.newInstance(loginVO,q,assignmentId)).addToBackStack(null).commit();
             });
 
             lists.add(courseInfoItem);

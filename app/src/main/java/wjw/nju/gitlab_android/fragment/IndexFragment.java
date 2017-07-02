@@ -52,7 +52,7 @@ public class IndexFragment extends Fragment {
         }
         indexInfoItemList.add(new IndexInfoItem("性别",gender));
         indexInfoItemList.add(new IndexInfoItem("GitID",loginVO.getS_git_id()==null?"暂无":loginVO.getS_git_id()));
-        indexInfoItemList.add(new IndexInfoItem("学号",loginVO.getS_number()==null?"暂无":loginVO.getS_number()));
+        indexInfoItemList.add(new IndexInfoItem("学号",loginVO.getS_number()==null||loginVO.getS_number().equals("null")?"暂无":loginVO.getS_number()));
 
 
 

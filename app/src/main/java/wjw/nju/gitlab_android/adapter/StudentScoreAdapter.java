@@ -61,7 +61,8 @@ public class StudentScoreAdapter extends BaseAdapter{
             TextView title3 = (TextView)convertView.findViewById(R.id.item_student_score);
             title3.setText(courseInfos.get(position).score);
 
-
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_questionresult_detail);
+            imageView.setOnClickListener(courseInfos.get(position).onClickListener);
             return convertView;
         }
 

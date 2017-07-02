@@ -1,12 +1,13 @@
 package wjw.nju.gitlab_android.apiservice.apiVO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wangjiawei on 2017/6/26.
  */
 
-public class AssignmentAnalysisVO {
+public class AssignmentAnalysisVO implements Serializable{
 
     /**
      * studentId : 256
@@ -97,7 +98,7 @@ public class AssignmentAnalysisVO {
             this.scoreResult = scoreResult;
         }
 
-        public static class MetricDataBean {
+        public static class MetricDataBean implements Serializable{
             /**
              * git_url : http://219.219.113.227:10080/151250185/Examination-01.git
              * measured : true
@@ -173,7 +174,7 @@ public class AssignmentAnalysisVO {
             }
         }
 
-        public static class TestResultBean {
+        public static class TestResultBean implements Serializable{
             /**
              * git_url : http://219.219.113.227:10080/151250185/Examination-01.git
              * compile_succeeded : true

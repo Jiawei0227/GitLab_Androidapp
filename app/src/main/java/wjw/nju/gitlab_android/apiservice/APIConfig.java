@@ -20,8 +20,8 @@ public class APIConfig {
         return BASEURL + "assignment/"+assignmentId+"/student/"+studentId+"/analysis";
     }
 
-    public static String GET_README(String assignmentId, String studentId){
-        return BASEURL + "assignment/"+assignmentId+"/student/"+studentId+"/analysis";
+    public static String GET_README(String assignmentId, String studentId, String questionId){
+        return BASEURL + "assignment/"+assignmentId+"/student/"+studentId+"/question/"+questionId;
     }
 
     public static String GET_STUDENT_BY_GROUP_SERVICE(String groupId) {

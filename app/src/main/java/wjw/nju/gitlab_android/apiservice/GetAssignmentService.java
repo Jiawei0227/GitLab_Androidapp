@@ -27,7 +27,7 @@ public class GetAssignmentService  extends AsyncTask<String, String,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String re = "[{\"id\":\"38\",\"name\":\"android测试1\"},{\"id\":\"93\",\"name\":\"android测试2\"}]";
+        String re = "[{\"id\":\"38\",\"name\":\"android测试1\"},{\"id\":\"93\",\"name\":\"android测试2\"},{\"id\":\"98\",\"name\":\"android测试3\"}]";
 
         return re;
     }
